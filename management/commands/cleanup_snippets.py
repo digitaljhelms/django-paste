@@ -11,6 +11,8 @@ class Command(LabelCommand):
             help='Max age in days of snippets. Older snippets get purged. Default: 30'),
         make_option('--verbose', '-v', action='store_true', dest='verbose', 
             help='Print count of purged snippets'),
+        make_option('--dry-run', '-d', action='store_true', dest='dry_run', 
+            help='Don\'t do anything.'),
     )
 
     help = "Purges snippets that are older than 30 days"
@@ -20,7 +22,11 @@ class Command(LabelCommand):
         max_age = datetime.datetime.now()-datetime.timedelta(days=max_age_days)  
         
         deleted_snippet_count = Snippet.objects.filter(published__lt=max_age).count()
-        Snippet.objects.filter(published__lt=max_age).delete()
         
-        if options.get('verbose') or False:
+        if options.get('dry_run'):
+            sys.stdout.write(u'Dry run - Doing nothing! *crossingfingers*\n')
+        else:
+            Snippet.objects.filter(published__lt=max_age).delete()
+        
+        if options.get('verbose'):
             sys.stdout.write(u"%s snippets were deleted cause they are too old.\n" % deleted_snippet_count)
