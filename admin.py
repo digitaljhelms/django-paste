@@ -1,4 +1,12 @@
 from dpaste.models import Snippet
 from django.contrib import admin
 
-admin.site.register(Snippet)
+class SnippetAdmin(admin.ModelAdmin):
+    list_display = (
+        '__unicode__',
+        'author',
+        'lexer',
+        'published',
+    )
+
+admin.site.register(Snippet, SnippetAdmin)
