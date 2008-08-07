@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}New snippet{% endblock %}
+{% block headline %}<h1>Paste a new snippet</h1>{% endblock %}
+
+{% block content %}
+<h2>New snippet</h2>
+<form method="post" action"." class="snippetform">
+<ol>
+	{{ snippet_form.as_ul }}
+	<li class="submit">
+		<input type="submit" value="Paste it"/>
+	</li>
+</ol>
+</form>
+{% endblock %}
+
+
+{% block sidebar %}
+    <h2>What is this?</h2>
+	
+	<p>dpaste.de is a code pastebin inspired by <a href="http://dpaste.com/">dpaste.com</a>.</p>
+	
+	<h2>News</h2>
+	
+	<p>User settings are working correctly now.</p>
+
+{% endblock %}

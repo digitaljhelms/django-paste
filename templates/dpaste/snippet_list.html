@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Snippet #{{ snippet.pk }}{% endblock %}
+{% block headline %}
+    <h1>Your latest {{ snippets_max }} snippets</h1>
+{% endblock %}
+
+{% block content %}
+    {% if snippet_list %}
+    {% for snippet in snippet_list %}
+    <h2>
+        <a href="{{ snippet.get_absolute_url }}">Snippet #{{ snippet.pk }}</a>
+        ~ {{ snippet.published|date:_("DATETIME_FORMAT") }}
+    </h2>
+    <p style="color: #555; margin: 8px 0 20px 0;">{{ snippet.content|truncatewords:40 }}</p>
+    {% endfor %}
+    {% else %}
+        <p>No snippets available.</p>
+    {% endif %}
+    
+
+    <div class="hint">
+        <p><strong>Remember:</strong> Your settings are stored in a session using a cookie.</p>
+    </div>
+{% endblock %}

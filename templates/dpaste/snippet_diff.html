@@ -1,0 +1,9 @@
+<h2>
+    <span style="float:right;">(<a href="#" onclick="$('#diff').slideUp('fast'); return false;">Close</a>)</span>
+    Diff between
+    <a href="{{ fileA.get_absolute_url }}">Snippet #{{ fileA.id }}</a>
+    and
+    <a href="{{ fileB.get_absolute_url }}">Snippet #{{ fileB.id }}</a>
+</h2>
+
+<pre class="code">{{ difftext|safe }}</pre>
