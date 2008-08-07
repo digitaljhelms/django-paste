@@ -17,11 +17,10 @@ class SnippetForm(forms.ModelForm):
     def __init__(self, request, *args, **kwargs):
         super(SnippetForm, self).__init__(*args, **kwargs)
         self.request = request
-        if self.request.session.get('userprefs') and \
-           self.request.session['userprefs'].get('display_all_lexer', False):
+        if self.request.session['userprefs'].get('display_all_lexer', False):
             self.fields['lexer'].choices = LEXER_LIST_ALL
             self.fields['lexer'].help_text = u'Youre displaying the whole bunch of lexers!'
-            self.fields['author'].initial = self.request.session['userprefs'].get('default_name', '')
+        self.fields['author'].initial = self.request.session['userprefs'].get('default_name', '')
 
     def save(self, parent=None, *args, **kwargs):
 
