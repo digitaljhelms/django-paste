@@ -76,9 +76,9 @@
             <input type="radio" name="b" value="{{ tree_item.id }}" {% ifequal snippet tree_item %}checked="checked"{% endifequal %}/>
         </span>
 		{% ifequal snippet tree_item %}
-            <strong>{{ tree_item }}</strong>
+            <strong>{% trans "Snippet" %} #{{ tree_item.id }}</strong>
        {% else %}
-            <a href="{{ tree_item.get_absolute_url }}">{{ tree_item }}</a>
+       <a href="{{ tree_item.get_absolute_url }}">{% trans "Snippet" %} #{{ tree_item.id }}</a>
 		{% endifequal %}
         </div>
         {% for level in structure.closed_levels %}</li></ul>{% endfor %}
