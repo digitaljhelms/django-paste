@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-08-08 23:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -162,11 +162,11 @@ msgstr ""
 #: templates/dpaste/snippet_new.html:3 templates/dpaste/snippet_new.html:7
 #, fuzzy
 msgid "New snippet"
-msgstr "Neuer Schnipsel"
+msgstr "Neues Snippet"
 
 #: templates/dpaste/snippet_new.html:4
 msgid "Paste a new snippet"
-msgstr "Schreibe einen neuen Schnipsel"
+msgstr "Schreibe ein neues Snippet"
 
 #: templates/dpaste/snippet_new.html:20
 msgid "WHAT_IS_THIS_TITLE"

@@ -2,7 +2,7 @@ import difflib
 
 from django.db import models
 from django.db.models import permalink
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 import mptt
 
 from dpaste.highlight import LEXER_DEFAULT, pygmentize

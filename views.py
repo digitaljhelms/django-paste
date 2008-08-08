@@ -3,7 +3,7 @@ from django.template.context import RequestContext
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from dpaste.forms import SnippetForm, UserSettingsForm
 from dpaste.models import Snippet
 from dpaste.highlight import pygmentize
