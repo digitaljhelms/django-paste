@@ -1,27 +1,26 @@
 {% extends "base.html" %}
 
 {% block headline %}
-    <h1>User Settings</h1>
+    <h1>{% trans "User Settings" %}</h1>
 {% endblock %}
 
 {% block content %}
     {% if settings_saved %}
     <div class="success">
-        <p>Your settings have been saved. Have a look on some of your
-            <a href="{% url snippet_userlist %}">latest snippets</a> to see effects.</p>
+        {% trans "USER_PREFS_SAVED_SUCCESSFULLY" %} 
     </div>
     {% endif %}
     
-    <h2>User Settings</h2>
+    <h2>{% trans "User Settings" %}</h2>
     
     <form class="snippetform" method="post" action=".">
     <ol>
         {{ settings_form.as_ul }}
-        <li class="submit"><input type="submit" value="Submit settings"/></li>
+        <li class="submit"><input type="submit" value="{% trans "Submit settings" %}"/></li>
     </ol>
     </form>
     
     <div class="hint">
-        <p><strong>Remember:</strong> Your settings are stored in a session using a cookie.</p>
+        {% trans "DATA_STORED_IN_A_COOKIE_HINT" %}
     </div>
 {% endblock %}

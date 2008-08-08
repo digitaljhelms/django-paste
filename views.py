@@ -3,6 +3,7 @@ from django.template.context import RequestContext
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import gettext_lazy as _
 from dpaste.forms import SnippetForm, UserSettingsForm
 from dpaste.models import Snippet
 from dpaste.highlight import pygmentize
@@ -129,7 +130,7 @@ def snippet_diff(request, template_name='dpaste/snippet_diff.html'):
         difftext = '\n'.join(d)
         difftext = pygmentize(difftext, 'diff')
     else:
-        difftext = u'No changes were made between this two files.'
+        difftext = _(u'No changes were made between this two files.')
 
     template_context = {
         'difftext': difftext,

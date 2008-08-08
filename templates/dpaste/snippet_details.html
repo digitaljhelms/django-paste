@@ -14,14 +14,14 @@
      {% endif %}
 {% endblock %}
 
-{% block title %}Snippet #{{ snippet.pk }}{% endblock %}
+{% block title %}{% trans "Snippet" %} #{{ snippet.pk }}{% endblock %}
 {% block headline %}
     <h1>
-        Snippet #{{ snippet.pk }}
+        {% trans "Snippet" %} #{{ snippet.pk }}
         {% if snippet.parent_id %}
-            (Copy of <a href="{{ snippet.parent.get_absolute_url }}">snippet #{{ snippet.parent.id }}</a>)
+            {% blocktrans with snippet.parent.get_absolute_url as parent_url and snippet.parent.id as parent_id %}(Copy of <a href="{{ parent_url }}">snippet #{{ parent_id }}</a>){% endblocktrans %}
         {% endif %}
-        <span class="date">{{ snippet.published|date:_("DATETIME_FORMAT") }} (UTC)</span>
+        <span class="date">{{ snippet.published|date:_("DATETIME_FORMAT") }} ({% trans "UTC" %})</span>
     </h1>
 {% endblock %}
 
@@ -31,8 +31,8 @@
 <div class="accordion">
     {# --------------------------- Snippet Details --------------------------- #}
     <h2>
-        {% if snippet.title %}{{ snippet.title }}{% else %} Snippet #{{ snippet.id }}{% endif %}
-        <span>{% if snippet.author %}by {{ snippet.author }}{% endif %}</span>
+        {% if snippet.title %}{{ snippet.title }}{% else %} {% trans "Snippet" %} #{{ snippet.id }}{% endif %}
+        <span>{% if snippet.author %}{% blocktrans with snippet.author as author %}by {{ author }}{% endblocktrans %}{% endif %}</span>
     </h2>
     <div class="container">
         <div class="snippet">
@@ -46,13 +46,13 @@
     </div>
 
     {# --------------------------- Snippet Answer --------------------------- #}
-    <h2>Write an answer &rarr;</h2>
+    <h2>{% trans "Write an answer" %} &rarr;</h2>
     <div class="container" style="display: none;">
         <form method="post" action"." class="snippetform">
         <ol>
         	{{ snippet_form.as_ul }}
         	<li class="submit">
-        		<input type="submit" value="Paste it"/>
+            <input type="submit" value="{% trans "Paste it" %}"/>
         	</li>
         </ol>
         </form>
@@ -64,7 +64,7 @@
 
 {% block sidebar %}
 {# --------------------------- History Tree --------------------------- #}
-    <h2>History</h2>
+    <h2>{% trans "History" %}</h2>
 
     <form method="get" id="diffform" action="{% url snippet_diff %}">
     <div class="tree">
@@ -84,13 +84,13 @@
         {% for level in structure.closed_levels %}</li></ul>{% endfor %}
         {% endfor %}
         <div class="submit">
-            <input type="submit" value="Compare"/>
+            <input type="submit" value="{% trans "Compare" %}"/>
         </div>
     </div>
     </form>
 
-    <h2>Options</h2>
-    <p><a href="{% url snippet_details_raw snippet.id %}">View raw</a></p>
+    <h2>{% trans "Options" %}</h2>
+    <p><a href="{% url snippet_details_raw snippet.id %}">{% trans "View raw" %}</a></p>
 {% endblock %}
 
 {% block script_footer %}

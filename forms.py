@@ -1,5 +1,7 @@
-from django import newforms as forms
+from django import forms
 from django.conf import settings
+#from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 from dpaste.models import Snippet
 from dpaste.highlight import LEXER_LIST_ALL, LEXER_LIST, LEXER_DEFAULT
 
@@ -17,16 +19,23 @@ class SnippetForm(forms.ModelForm):
     def __init__(self, request, *args, **kwargs):
         super(SnippetForm, self).__init__(*args, **kwargs)
         self.request = request
-        if self.request.session['userprefs'].get('display_all_lexer', False):
-            self.fields['lexer'].choices = LEXER_LIST_ALL
-            self.fields['lexer'].help_text = u'Youre displaying the whole bunch of lexers!'
-        self.fields['author'].initial = self.request.session['userprefs'].get('default_name', '')
+
+        try:
+            if self.request.session['userprefs'].get('display_all_lexer', False):
+                self.fields['lexer'].choices = LEXER_LIST_ALL
+                self.fields['lexer'].help_text = _(u'Youre displaying the whole bunch of lexers!')
+        except KeyError:
+            pass
+
+        try:
+            self.fields['author'].initial = self.request.session['userprefs'].get('default_name', '')
+        except KeyError:
+            pass
 
     def save(self, parent=None, *args, **kwargs):
 
         # Set parent snippet
         if parent:
-            print dir(self.instance)
             self.instance.parent = parent
 
         # Save snippet in the db
@@ -56,7 +65,7 @@ class SnippetForm(forms.ModelForm):
 # User Settings
 #===============================================================================
 
-USERPREFS_FONT_CHOICES = [(None, 'Default')] + [
+USERPREFS_FONT_CHOICES = [(None, _(u'Default'))] + [
     (i, i) for i in sorted((
         'Monaco',
         'Bitstream Vera Sans Mono',
@@ -65,15 +74,16 @@ USERPREFS_FONT_CHOICES = [(None, 'Default')] + [
     ))
 ]
 
-USERPREFS_SIZES = [(None, 'Default')] + [(i, '%dpx' % i) for i in range(5, 25)]
+USERPREFS_SIZES = [(None, _(u'Default'))] + [(i, '%dpx' % i) for i in range(5, 25)]
 
 class UserSettingsForm(forms.Form):
 
-    default_name = forms.CharField(required=False)
+    default_name = forms.CharField(label=_(u'Default Name'), required=False)
     display_all_lexer = forms.BooleanField(
+        label=_(u'Display all lexer'), 
         required=False,
         widget=forms.CheckboxInput
     )
-    font_family = forms.ChoiceField(required=False, choices=USERPREFS_FONT_CHOICES)
-    font_size = forms.ChoiceField(required=False, choices=USERPREFS_SIZES)
-    line_height = forms.ChoiceField(required=False, choices=USERPREFS_SIZES)
+    font_family = forms.ChoiceField(label=_(u'Font Family'), required=False, choices=USERPREFS_FONT_CHOICES)
+    font_size = forms.ChoiceField(label=_(u'Font Size'), required=False, choices=USERPREFS_SIZES)
+    line_height = forms.ChoiceField(label=_(u'Line Height'), required=False, choices=USERPREFS_SIZES)

@@ -1,0 +1,192 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-08 23:42+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: forms.py:26
+msgid "Youre displaying the whole bunch of lexers!"
+msgstr "Du siehst derzeit das ganze Bündel an Lexern!"
+
+#: forms.py:68 forms.py:77
+msgid "Default"
+msgstr "Standard"
+
+#: forms.py:81
+msgid "Default Name"
+msgstr "Standard Name"
+
+#: forms.py:83
+msgid "Display all lexer"
+msgstr "Alle Lexer anzeigen"
+
+#: forms.py:87
+msgid "Font Family"
+msgstr "Schriftart"
+
+#: forms.py:88
+msgid "Font Size"
+msgstr "Schriftgröße"
+
+#: forms.py:89
+msgid "Line Height"
+msgstr "Zeilenhöhe"
+
+#: models.py:43
+msgid "Title"
+msgstr "Titel"
+
+#: models.py:44
+#, fuzzy
+msgid "Author"
+msgstr "Autor"
+
+#: models.py:45
+msgid "Content"
+msgstr "Inhalt"
+
+#: models.py:46
+msgid "Highlighted Content"
+msgstr "Gehighlighteter Content"
+
+#: models.py:47
+msgid "Lexer"
+msgstr "Lexer"
+
+#: models.py:48
+msgid "Published"
+msgstr "Veröffentlicht"
+
+#: models.py:69 templates/dpaste/snippet_details.html:17
+#: templates/dpaste/snippet_details.html:20
+#: templates/dpaste/snippet_details.html:34
+#: templates/dpaste/snippet_list.html:3 templates/dpaste/snippet_list.html:12
+msgid "Snippet"
+msgstr "Snippet"
+
+#: views.py:133
+msgid "No changes were made between this two files."
+msgstr "Zwischen diesen beiden Dateien wurden keine Änderungen durchgeführt."
+
+#: templates/dpaste/snippet_details.html:22
+#, python-format
+msgid "(Copy of <a href=\"%(parent_url)s\">snippet #%(parent_id)s</a>)"
+msgstr "(Kopie von <a href=\"%(parent_url)s\">Snippet #%(parent_id)s</a>)"
+
+#: templates/dpaste/snippet_details.html:24
+#: templates/dpaste/snippet_list.html:13
+msgid "DATETIME_FORMAT"
+msgstr ""
+
+#: templates/dpaste/snippet_details.html:24
+msgid "UTC"
+msgstr "UTC"
+
+#: templates/dpaste/snippet_details.html:35
+#, python-format
+msgid "by %(author)s"
+msgstr "von %(author)s"
+
+#: templates/dpaste/snippet_details.html:49
+msgid "Write an answer"
+msgstr "Schreibe eine Antwort"
+
+#: templates/dpaste/snippet_details.html:55
+#: templates/dpaste/snippet_new.html:12
+msgid "Paste it"
+msgstr "Paste es"
+
+#: templates/dpaste/snippet_details.html:67
+msgid "History"
+msgstr "Verlauf"
+
+#: templates/dpaste/snippet_details.html:87
+msgid "Compare"
+msgstr "Vergleichen"
+
+#: templates/dpaste/snippet_details.html:92
+msgid "Options"
+msgstr "Optionen"
+
+#: templates/dpaste/snippet_details.html:93
+msgid "View raw"
+msgstr "Rohformat"
+
+#: templates/dpaste/snippet_diff.html:2
+msgid "Close"
+msgstr "Schließen"
+
+#: templates/dpaste/snippet_diff.html:3
+#, python-format
+msgid ""
+"\n"
+"    Diff between\n"
+"    <a href=\"%(filea_url)s\">Snippet #%(filea_id)s</a>\n"
+"    and\n"
+"    <a href=\"%(fileb_url)s\">Snippet #%(fileb_id)s</a>\n"
+"    "
+msgstr ""
+"\n"
+"    Diff zwischen\n"
+"    <a href=\"%(filea_url)s\">Snippet #%(filea_id)s</a>\n"
+"    und\n"
+"    <a href=\"%(fileb_url)s\">Snippet #%(fileb_id)s</a>\n"
+"    "
+
+#: templates/dpaste/snippet_list.html:5
+#, python-format
+msgid "Your latest %(snippets_max)s snippets"
+msgstr "Deine neuesten %(snippets_max)s Snippets"
+
+#: templates/dpaste/snippet_list.html:18
+msgid "No snippets available."
+msgstr "Keine Snippets verfügbar"
+
+#: templates/dpaste/snippet_list.html:23 templates/dpaste/userprefs.html:24
+msgid "DATA_STORED_IN_A_COOKIE_HINT"
+msgstr ""
+"<p><strong>Hinweis:</strong> Deine Daten werden in einem Cookie gespeichert."
+
+#: templates/dpaste/snippet_new.html:3 templates/dpaste/snippet_new.html:7
+#, fuzzy
+msgid "New snippet"
+msgstr "Neuer Schnipsel"
+
+#: templates/dpaste/snippet_new.html:4
+msgid "Paste a new snippet"
+msgstr "Schreibe einen neuen Schnipsel"
+
+#: templates/dpaste/snippet_new.html:20
+msgid "WHAT_IS_THIS_TITLE"
+msgstr "Was ist das hier?"
+
+#: templates/dpaste/snippet_new.html:21
+msgid "WHAT_IS_THIS_DESCRIPTION"
+msgstr "dpaste.de ist ein Codespeicher inspiriert von "
+"<a href=\"http://dpaste.com/\">dpaste.com</a>. "
+"Die Vorteile und den Quellcode dieser Seite findest du bei "
+"<a href=\"http://code.google.com/p/django-paste/\">Google Code</a>."
+
+#: templates/dpaste/userprefs.html:4 templates/dpaste/userprefs.html.py:14
+msgid "User Settings"
+msgstr "Benutzereinstellungen"
+
+#: templates/dpaste/userprefs.html:10
+msgid "USER_PREFS_SAVED_SUCCESSFULLY"
+msgstr "Deine Einstellungen wurden erfolgreich gespeichert."
+
+#: templates/dpaste/userprefs.html:19
+msgid "Submit settings"
+msgstr "Einstellungen abschicken"

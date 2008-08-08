@@ -2,6 +2,7 @@ import difflib
 
 from django.db import models
 from django.db.models import permalink
+from django.utils.translation import gettext as _
 import mptt
 
 from dpaste.highlight import LEXER_DEFAULT, pygmentize
@@ -39,12 +40,12 @@ class Snippet(models.Model):
     >>> q.get_root()
     <Snippet: Snippet #1>
     """
-    title = models.CharField(max_length=120, blank=True)
-    author = models.CharField(max_length=30, blank=True)
-    content = models.TextField()
-    content_highlighted = models.TextField(blank=True)
-    lexer = models.CharField(max_length=30, default=LEXER_DEFAULT)
-    published = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(_(u'Title'), max_length=120, blank=True)
+    author = models.CharField(_(u'Author'), max_length=30, blank=True)
+    content = models.TextField(_(u'Content'), )
+    content_highlighted = models.TextField(_(u'Highlighted Content'), blank=True)
+    lexer = models.CharField(_(u'Lexer'), max_length=30, default=LEXER_DEFAULT)
+    published = models.DateTimeField(_(u'Published'), auto_now_add=True)
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
 
     class Meta:
@@ -52,6 +53,9 @@ class Snippet(models.Model):
 
     def get_linecount(self):
         return len(self.content.splitlines())
+
+    def content_splitted(self):
+        return self.content_highlighted.splitlines()
 
     def save(self):
         self.content_highlighted = pygmentize(self.content, self.lexer)
@@ -62,6 +66,6 @@ class Snippet(models.Model):
         return ('snippet_details', (self.pk,))
 
     def __unicode__(self):
-        return 'Snippet #%s' % self.pk
+        return '%s #%s' % (_(u'Snippet'), self.pk)
 
 mptt.register(Snippet, order_insertion_by=['content'])
