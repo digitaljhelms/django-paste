@@ -1,12 +1,13 @@
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template.context import RequestContext
-from django.http import HttpResponseRedirect, HttpResponseBadRequest
+from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponse
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext_lazy as _
 from dpaste.forms import SnippetForm, UserSettingsForm
 from dpaste.models import Snippet
-from dpaste.highlight import pygmentize
+from dpaste.highlight import pygmentize, guess_code_lexer
+import simplejson
 import difflib
 
 def snippet_new(request, template_name='dpaste/snippet_new.html'):
@@ -143,3 +144,8 @@ def snippet_diff(request, template_name='dpaste/snippet_diff.html'):
         template_context,
         RequestContext(request)
     )
+    
+def guess_lexer(request):
+    code_string = request.GET.get('codestring', False)
+    response = simplejson.dumps({'lexer': guess_code_lexer(code_string)})
+    return HttpResponse(response)

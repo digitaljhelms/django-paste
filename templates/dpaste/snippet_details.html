@@ -48,14 +48,23 @@
     {# --------------------------- Snippet Answer --------------------------- #}
     <h2>{% trans "Write an answer" %} &rarr;</h2>
     <div class="container" style="display: none;">
-        <form method="post" action"." class="snippetform">
-        <ol>
-        	{{ snippet_form.as_ul }}
-        	<li class="submit">
-            <input type="submit" value="{% trans "Paste it" %}"/>
-        	</li>
-        </ol>
-        </form>
+		<form method="post" action"." class="snippetform">
+		<ol>
+			{% for field in snippet_form %}
+			<li>
+				{{ field.errors }}
+				{{ field.label_tag }}
+				{{ field }}
+				{% if request.session.userprefs.display_all_lexer %}
+				{% ifequal field.name "lexer" %}
+					<input type="button" value="{% trans "Guess lexer" %}" id="guess_lexer_btn"/>
+				{% endifequal %}
+				{% endif %}
+			</li>
+			{% endfor %}
+			<li class="submit"><input type="submit" value="{% trans "Paste it" %}"/></li>
+		</ol>
+		</form>
     </div>
 </div>
 {% endblock %}
@@ -114,6 +123,21 @@ jQuery(document).ready(function(){
 		});
 		return false;
 	});
+
+	{% if request.session.userprefs.display_all_lexer %}
+	$('#guess_lexer_btn').click(function(){
+		$.getJSON('{% url snippet_guess_lexer %}',
+			{'codestring': $('#id_content').val()},
+			function(data){
+				if(data.lexer == "unknown"){
+					$('#guess_lexer_btn').css('color', 'red');
+				}else{
+					$('#id_lexer').val(data.lexer);
+					$('#guess_lexer_btn').css('color', 'inherit');
+				}
+			});
+	});
+	{% endif %}
 });
 </script>
 {% endblock %}

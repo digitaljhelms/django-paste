@@ -4,19 +4,51 @@
 {% block headline %}<h1>{% trans "Paste a new snippet" %}</h1>{% endblock %}
 
 {% block content %}
-<h2>{% trans "New snippet" %}</h2>
-<form method="post" action"." class="snippetform">
-<ol>
-	{{ snippet_form.as_ul }}
-	<li class="submit">
-    <input type="submit" value="{% trans "Paste it" %}"/>
-	</li>
-</ol>
-</form>
+	<h2>{% trans "New snippet" %}</h2>
+	<form method="post" action"." class="snippetform">
+	<ol>
+		{% for field in snippet_form %}
+		<li>
+			{{ field.errors }}
+			{{ field.label_tag }}
+			{{ field }}
+			{% if request.session.userprefs.display_all_lexer %}
+			{% ifequal field.name "lexer" %}
+				<input type="button" value="{% trans "Guess lexer" %}" id="guess_lexer_btn"/>
+			{% endifequal %}
+			{% endif %}
+		</li>
+		{% endfor %}
+		<li class="submit"><input type="submit" value="{% trans "Paste it" %}"/></li>
+	</ol>
+	</form>
 {% endblock %}
 
 
 {% block sidebar %} 
     <h2>{% trans "WHAT_IS_THIS_TITLE" %}</h2>
-    {% trans "WHAT_IS_THIS_DESCRIPTION" %}	
+    <p>{% trans "WHAT_IS_THIS_DESCRIPTION" %}</p>
+{% endblock %}
+
+
+{% block script_footer %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	{% if request.session.userprefs.display_all_lexer %}
+	$('#guess_lexer_btn').click(function(){
+		$.getJSON('{% url snippet_guess_lexer %}',
+			{'codestring': $('#id_content').val()},
+			function(data){
+				if(data.lexer == "unknown"){
+					$('#guess_lexer_btn').css('color', 'red');
+				}else{
+					$('#id_lexer').val(data.lexer);
+					$('#guess_lexer_btn').css('color', 'inherit');
+				}
+			});
+	});
+	{% endif %}
+});
+</script>
 {% endblock %}

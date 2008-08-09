@@ -13,6 +13,7 @@ class SnippetForm(forms.ModelForm):
     lexer = forms.ChoiceField(
         choices=LEXER_LIST,
         initial=LEXER_DEFAULT,
+        label=_(u'Lexer'),
     )
 
     def __init__(self, request, *args, **kwargs):
@@ -22,7 +23,6 @@ class SnippetForm(forms.ModelForm):
         try:
             if self.request.session['userprefs'].get('display_all_lexer', False):
                 self.fields['lexer'].choices = LEXER_LIST_ALL
-                self.fields['lexer'].help_text = _(u'Youre displaying the whole bunch of lexers!')
         except KeyError:
             pass
 
@@ -81,7 +81,8 @@ class UserSettingsForm(forms.Form):
     display_all_lexer = forms.BooleanField(
         label=_(u'Display all lexer'), 
         required=False,
-        widget=forms.CheckboxInput
+        widget=forms.CheckboxInput,
+        help_text=_(u'This also enables the super secret \'guess lexer\' function.'),
     )
     font_family = forms.ChoiceField(label=_(u'Font Family'), required=False, choices=USERPREFS_FONT_CHOICES)
     font_size = forms.ChoiceField(label=_(u'Font Size'), required=False, choices=USERPREFS_SIZES)

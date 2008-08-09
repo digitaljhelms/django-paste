@@ -3,44 +3,44 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-08 23:42+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-
+"POT-Creation-Date: 2008-08-10 01:14+0200\n"
+"PO-Revision-Date: 2008-08-10 01:20+0100\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Martin Mahner <martin@mahner.org>\n"
 
-#: forms.py:26
-msgid "Youre displaying the whole bunch of lexers!"
-msgstr "Du siehst derzeit das ganze Bündel an Lexern!"
-
-#: forms.py:68 forms.py:77
+#: forms.py:66
+#: forms.py:75
 msgid "Default"
 msgstr "Standard"
 
-#: forms.py:81
+#: forms.py:79
 msgid "Default Name"
 msgstr "Standard Name"
 
-#: forms.py:83
+#: forms.py:81
 msgid "Display all lexer"
-msgstr "Alle Lexer anzeigen"
+msgstr "Alle Syntaxformate anzeigen"
 
-#: forms.py:87
+#: forms.py:84
+msgid "This also enables the super secret 'guess lexer' function."
+msgstr "Dies aktiviert auch die super geheime 'Syntax erraten' Funktion."
+
+#: forms.py:86
 msgid "Font Family"
 msgstr "Schriftart"
 
-#: forms.py:88
+#: forms.py:87
 msgid "Font Size"
 msgstr "Schriftgröße"
 
-#: forms.py:89
+#: forms.py:88
 msgid "Line Height"
 msgstr "Zeilenhöhe"
 
@@ -49,7 +49,6 @@ msgid "Title"
 msgstr "Titel"
 
 #: models.py:44
-#, fuzzy
 msgid "Author"
 msgstr "Autor"
 
@@ -63,20 +62,24 @@ msgstr "Gehighlighteter Content"
 
 #: models.py:47
 msgid "Lexer"
-msgstr "Lexer"
+msgstr "Syntax"
 
 #: models.py:48
 msgid "Published"
 msgstr "Veröffentlicht"
 
-#: models.py:69 templates/dpaste/snippet_details.html:17
+#: models.py:69
+#: templates/dpaste/snippet_details.html:17
 #: templates/dpaste/snippet_details.html:20
 #: templates/dpaste/snippet_details.html:34
-#: templates/dpaste/snippet_list.html:3 templates/dpaste/snippet_list.html:12
+#: templates/dpaste/snippet_details.html:88
+#: templates/dpaste/snippet_details.html:90
+#: templates/dpaste/snippet_list.html:3
+#: templates/dpaste/snippet_list.html:12
 msgid "Snippet"
 msgstr "Snippet"
 
-#: views.py:133
+#: views.py:134
 msgid "No changes were made between this two files."
 msgstr "Zwischen diesen beiden Dateien wurden keine Änderungen durchgeführt."
 
@@ -103,24 +106,29 @@ msgstr "von %(author)s"
 msgid "Write an answer"
 msgstr "Schreibe eine Antwort"
 
-#: templates/dpaste/snippet_details.html:55
-#: templates/dpaste/snippet_new.html:12
+#: templates/dpaste/snippet_details.html:60
+#: templates/dpaste/snippet_new.html:17
+msgid "Guess lexer"
+msgstr "Syntax erraten"
+
+#: templates/dpaste/snippet_details.html:65
+#: templates/dpaste/snippet_new.html:22
 msgid "Paste it"
 msgstr "Paste es"
 
-#: templates/dpaste/snippet_details.html:67
+#: templates/dpaste/snippet_details.html:76
 msgid "History"
 msgstr "Verlauf"
 
-#: templates/dpaste/snippet_details.html:87
+#: templates/dpaste/snippet_details.html:96
 msgid "Compare"
 msgstr "Vergleichen"
 
-#: templates/dpaste/snippet_details.html:92
+#: templates/dpaste/snippet_details.html:101
 msgid "Options"
 msgstr "Optionen"
 
-#: templates/dpaste/snippet_details.html:93
+#: templates/dpaste/snippet_details.html:102
 msgid "View raw"
 msgstr "Rohformat"
 
@@ -154,13 +162,13 @@ msgstr "Deine neuesten %(snippets_max)s Snippets"
 msgid "No snippets available."
 msgstr "Keine Snippets verfügbar"
 
-#: templates/dpaste/snippet_list.html:23 templates/dpaste/userprefs.html:24
+#: templates/dpaste/snippet_list.html:23
+#: templates/dpaste/userprefs.html:24
 msgid "DATA_STORED_IN_A_COOKIE_HINT"
-msgstr ""
-"<p><strong>Hinweis:</strong> Deine Daten werden in einem Cookie gespeichert."
+msgstr "<p><strong>Hinweis:</strong> Deine Daten werden in einem Cookie gespeichert."
 
-#: templates/dpaste/snippet_new.html:3 templates/dpaste/snippet_new.html:7
-#, fuzzy
+#: templates/dpaste/snippet_new.html:3
+#: templates/dpaste/snippet_new.html:7
 msgid "New snippet"
 msgstr "Neues Snippet"
 
@@ -168,18 +176,16 @@ msgstr "Neues Snippet"
 msgid "Paste a new snippet"
 msgstr "Schreibe ein neues Snippet"
 
-#: templates/dpaste/snippet_new.html:20
+#: templates/dpaste/snippet_new.html:29
 msgid "WHAT_IS_THIS_TITLE"
 msgstr "Was ist das hier?"
 
-#: templates/dpaste/snippet_new.html:21
+#: templates/dpaste/snippet_new.html:30
 msgid "WHAT_IS_THIS_DESCRIPTION"
-msgstr "dpaste.de ist ein Codespeicher inspiriert von "
-"<a href=\"http://dpaste.com/\">dpaste.com</a>. "
-"Die Vorteile und den Quellcode dieser Seite findest du bei "
-"<a href=\"http://code.google.com/p/django-paste/\">Google Code</a>."
+msgstr "dpaste.de ist ein Codespeicher inspiriert von <a href=\"http://dpaste.com/\">dpaste.com</a>. Die Vorteile und den Quellcode dieser Seite findest du bei <a href=\"http://code.google.com/p/django-paste/\">Google Code</a>."
 
-#: templates/dpaste/userprefs.html:4 templates/dpaste/userprefs.html.py:14
+#: templates/dpaste/userprefs.html:4
+#: templates/dpaste/userprefs.html.py:14
 msgid "User Settings"
 msgstr "Benutzereinstellungen"
 
@@ -188,5 +194,9 @@ msgid "USER_PREFS_SAVED_SUCCESSFULLY"
 msgstr "Deine Einstellungen wurden erfolgreich gespeichert."
 
 #: templates/dpaste/userprefs.html:19
-msgid "Submit settings"
-msgstr "Einstellungen abschicken"
+msgid "Save settings"
+msgstr "Einstellungen speichern"
+
+#~ msgid "Youre displaying the whole bunch of lexers!"
+#~ msgstr "Du siehst derzeit das ganze Bündel an Lexern!"
+
