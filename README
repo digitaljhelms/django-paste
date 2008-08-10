@@ -24,6 +24,7 @@ Todo/Maybe's:
     * Ability to annotate lines
     * Make django-mptt and pygments optional
     * Permanently stored user settings 
+    * An RPC-API to fetch snippets via VIM or so.
 
 Example:
 ========
