@@ -10,6 +10,7 @@ Originally inspired by dpaste.com this application adds the ability to:
     * A huge bunch of syntax highlighters (lexers)
     * User defined settings to change the font-family as well as font-sizes
     * Nicer colors 
+    * Multilangual interface
 
 Requirements:
 =============
@@ -20,7 +21,6 @@ Requirements:
 Todo/Maybe's:
 =============
 
-    * Multilangual interface
     * Ability to annotate lines
     * Make django-mptt and pygments optional
     * Permanently stored user settings 
