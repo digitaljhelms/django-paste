@@ -29,23 +29,25 @@
 <div id="diff" style="display:none;">diff</div>
 
 <div class="accordion">
-    {# --------------------------- Snippet Details --------------------------- #}
+    <div class="snippet-options">
+        <a id="toggleWordwrap" href="#">{% trans "Wordwrap" %}</a>
+    </div>
     <h2>
         {% if snippet.title %}{{ snippet.title }}{% else %} {% trans "Snippet" %} #{{ snippet.id }}{% endif %}
         <span>{% if snippet.author %}{% blocktrans with snippet.author as author %}by {{ author }}{% endblocktrans %}{% endif %}</span>
     </h2>
+    
     <div class="container">
         <div class="snippet">
         <table>
             <tr>
                 <th><pre class="code">{% for l in lines %}<a href="#l{{ forloop.counter }}" id="l{{ forloop.counter }}">{{ forloop.counter }}</a>{% endfor %}</pre></th>
-                <td><pre class="code">{{ snippet.content_highlighted|safe }}</pre></td>
+                <td><pre class="code">{% for line in snippet.content_splitted %}<div class="line" id="l{{ forloop.counter }}">{{ line|safe }}</div>{% endfor %}</pre></td>
             </tr>
         </table>
         </div>
     </div>
 
-    {# --------------------------- Snippet Answer --------------------------- #}
     <h2>{% trans "Write an answer" %} &rarr;</h2>
     <div class="container" style="display: none;">
 		<form method="post" action"." class="snippetform">
@@ -72,7 +74,6 @@
 
 
 {% block sidebar %}
-{# --------------------------- History Tree --------------------------- #}
     <h2>{% trans "History" %}</h2>
 
     <form method="get" id="diffform" action="{% url snippet_diff %}">
@@ -114,6 +115,9 @@ jQuery(document).ready(function(){
 	   duration: 2000,
 	});
 
+    /**
+    * Diff Ajax Call
+    */
 	$("form#diffform").submit(function() {
 		$.get("{% url snippet_diff %}", {
 			a: $("input[name=a]:checked").val(),
@@ -124,7 +128,35 @@ jQuery(document).ready(function(){
 		return false;
 	});
 
-	{% if request.session.userprefs.display_all_lexer %}
+    /**
+    * Wordwrap
+    */
+    $('#toggleWordwrap').toggle(
+        function(){
+            $('div.snippet pre.code').css('white-space', 'pre-wrap');
+            return false;
+        },
+        function(){
+            $('div.snippet pre.code').css('white-space', 'pre');
+            return false;    
+        }
+    );
+
+    /**
+    * Line Highlighting
+    */
+    $('div.snippet th a').each(function(i){
+        $(this).click(function(){
+            var j = $(this).text();
+            $('div.snippet div.line.marked').removeClass('marked');
+            $('div.snippet div.line#l'+j).toggleClass('marked');    
+        });
+    });
+    
+    {% if request.session.userprefs.display_all_lexer %}
+    /**
+    * Lexer Guessing
+    */
 	$('#guess_lexer_btn').click(function(){
 		$.getJSON('{% url snippet_guess_lexer %}',
 			{'codestring': $('#id_content').val()},
