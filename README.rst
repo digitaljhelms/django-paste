@@ -1,5 +1,5 @@
 ===================================================
-dpaste is a code pastebin application using Django.
+dpaste - code pastebin application
 ===================================================
 
 Originally inspired by dpaste.com this application adds the ability to:
@@ -15,24 +15,8 @@ Originally inspired by dpaste.com this application adds the ability to:
 Requirements:
 =============
 
-- django-mptt for the nested-set history tree
-- Pygments for syntax highlighting 
+- `django-mptt`_ for the nested-set history tree
+- Pygments_ for syntax highlighting 
 
-Todo/Maybe's:
-=============
-
-- Ability to annotate lines
-- Make django-mptt and pygments optional
-- Permanently stored user settings 
-- A RPC-API to fetch snippets via VIM or so
-- Ability to let user delete his last ``n`` snippets
-- Use random ids instead of continuous numbers
-    
-
-Example:
-========
-
-Check out the example page dpaste_de to see this application in action as well as the integration into other projects.
-
-Or just visit dpaste.de!
-
+.. _`django-mptt`: http://code.google.com/p/django-mptt/
+.. _Pygments: http://pygments.org/
