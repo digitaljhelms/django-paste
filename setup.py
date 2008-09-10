@@ -2,7 +2,7 @@ import os
 from distutils.core import setup
 from distutils.command.install import INSTALL_SCHEMES
 
-app_name = 'paste'
+app_name = 'dpaste'
 version = __import__(app_name).__version__
 
 # Tell distutils to put the data_files in platform-specific installation

@@ -1,6 +1,6 @@
-===================================================
+==================================
 dpaste - code pastebin application
-===================================================
+==================================
 
 Originally inspired by dpaste.com this application adds the ability to:
 
@@ -9,8 +9,17 @@ Originally inspired by dpaste.com this application adds the ability to:
 - See your latest 25 snippets (admin setting)
 - A huge bunch of syntax highlighters (lexers)
 - User defined settings to change the font-family as well as font-sizes
-- Nicer colors 
+- Nice colors 
 - Multilangual interface
+
+Installation:
+=============
+
+1. Add ``dpaste`` to your pythonpath.
+2. Add ``dpaste`` to your ``INSTALLED_APPS`` in your django project settings.
+3. Add this line to your urlsconf::
+
+    (r'^mypaste/', include('dpaste.urls')),
 
 Requirements:
 =============
