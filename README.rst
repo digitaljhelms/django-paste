@@ -29,3 +29,8 @@ Requirements:
 
 .. _`django-mptt`: http://code.google.com/p/django-mptt/
 .. _Pygments: http://pygments.org/
+
+Latest version:
+===============
+
+The primary repository is located on Github: http://github.com/bartTC/django-paste/

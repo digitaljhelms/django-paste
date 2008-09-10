@@ -3,6 +3,7 @@ from distutils.core import setup
 from distutils.command.install import INSTALL_SCHEMES
 
 app_name = 'dpaste'
+app_url = 'http://github.com/bartTC/django-paste/'
 version = __import__(app_name).__version__
 
 # Tell distutils to put the data_files in platform-specific installation
@@ -34,11 +35,11 @@ for dirpath, dirnames, filenames in os.walk(app_name):
 
 setup(name='django-'+app_name,
       version=version,
-      description='A Django app to make minor changes to your templates on the fly.',
+      description='A django pastebin application.',
       long_description=open('README.rst').read(),
       author='Martin Mahner',
       author_email='martin@mahner.org',
-      url='http://code.google.com/p/django-%s/' % app_name,
+      url=app_url,
       package_dir={app_name: app_name},
       packages=packages,
       package_data={app_name: data_files},
