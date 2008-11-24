@@ -1,51 +1,25 @@
+import datetime
 import difflib
-
+import random
+import mptt
 from django.db import models
 from django.db.models import permalink
 from django.utils.translation import ugettext_lazy as _
-import mptt
-
 from dpaste.highlight import LEXER_DEFAULT, pygmentize
 
+t = 'abcdefghijkmnopqrstuvwwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ1234567890'
+def generate_secret_id(length=4):
+    return ''.join([random.choice(t) for i in range(length)]) 
 
 class Snippet(models.Model):
-    """
-    Stores the snippets.
-
-    Some Doctests:
-    ==============
-    >>> from dpaste.models import Snippet
-    >>> p = Snippet(title=u'foobar', author=u'foo@bar.invalid', lexer=u'text', content=u'foo')
-    >>> p.title
-    u'foobar'
-
-    >>> p.content_highlighted
-    ''
-
-    # Highlighted content is processed on save
-    >>> p.save()
-
-    # Now there is highlighted content (well, it's not really highlighted due
-    # the simple text lexer.
-    >>> p.content_highlighted
-    u'foo\\n'
-
-    Relationships between snippets
-    ------------------------------
-    >>> q = Snippet(title=u'answer to foobar', lexer=u'text', content=u'bar')
-    >>> q.parent = p
-    >>> q.save()
-
-    # There is now a relationship between ``q`` and ``p``
-    >>> q.get_root()
-    <Snippet: Snippet #1>
-    """
+    secret_id = models.CharField(_(u'Secret ID'), max_length=4, blank=True)
     title = models.CharField(_(u'Title'), max_length=120, blank=True)
     author = models.CharField(_(u'Author'), max_length=30, blank=True)
     content = models.TextField(_(u'Content'), )
     content_highlighted = models.TextField(_(u'Highlighted Content'), blank=True)
     lexer = models.CharField(_(u'Lexer'), max_length=30, default=LEXER_DEFAULT)
-    published = models.DateTimeField(_(u'Published'), auto_now_add=True)
+    published = models.DateTimeField(_(u'Published'), blank=True)
+    expires = models.DateTimeField(_(u'Expires'), blank=True, help_text='asdf')
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
 
     class Meta:
@@ -58,14 +32,17 @@ class Snippet(models.Model):
         return self.content_highlighted.splitlines()
 
     def save(self):
+        if not self.pk:
+            self.published = datetime.datetime.now()
+            self.secret_id = generate_secret_id()
         self.content_highlighted = pygmentize(self.content, self.lexer)
         super(Snippet, self).save()
 
     @permalink
     def get_absolute_url(self):
-        return ('snippet_details', (self.pk,))
+        return ('snippet_details', (self.secret_id,))
 
     def __unicode__(self):
-        return '%s #%s' % (_(u'Snippet'), self.pk)
+        return '%s' % self.secret_id
 
 mptt.register(Snippet, order_insertion_by=['content'])

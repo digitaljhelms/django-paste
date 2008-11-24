@@ -3,10 +3,19 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from dpaste.models import Snippet
 from dpaste.highlight import LEXER_LIST_ALL, LEXER_LIST, LEXER_DEFAULT
+import datetime
 
 #===============================================================================
 # Snippet Form and Handling
 #===============================================================================
+
+EXPIRE_CHOICES = (
+    (3600, _(u'In one hour')),
+    (3600*24*7, _(u'In one week')),
+    (3600*24*30, _(u'In one month')),
+)
+
+EXPIRE_DEFAULT = 3600*24*30
 
 class SnippetForm(forms.ModelForm):
 
@@ -15,11 +24,17 @@ class SnippetForm(forms.ModelForm):
         initial=LEXER_DEFAULT,
         label=_(u'Lexer'),
     )
+    
+    expire_options = forms.ChoiceField(
+        choices=EXPIRE_CHOICES,
+        initial=EXPIRE_DEFAULT,
+        label=_(u'Expires'),
+    )
 
     def __init__(self, request, *args, **kwargs):
         super(SnippetForm, self).__init__(*args, **kwargs)
         self.request = request
-
+        
         try:
             if self.request.session['userprefs'].get('display_all_lexer', False):
                 self.fields['lexer'].choices = LEXER_LIST_ALL
@@ -30,13 +45,17 @@ class SnippetForm(forms.ModelForm):
             self.fields['author'].initial = self.request.session['userprefs'].get('default_name', '')
         except KeyError:
             pass
-
+        
     def save(self, parent=None, *args, **kwargs):
 
         # Set parent snippet
         if parent:
             self.instance.parent = parent
-
+        
+        # Add expire datestamp
+        self.instance.expires = datetime.datetime.now() + \
+            datetime.timedelta(seconds=int(self.cleaned_data['expire_options']))
+        
         # Save snippet in the db
         super(SnippetForm, self).save(*args, **kwargs)
 

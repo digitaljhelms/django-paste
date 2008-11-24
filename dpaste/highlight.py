@@ -6,41 +6,23 @@ from pygments import highlight
 
 LEXER_LIST_ALL = sorted([(i[1][0], i[0]) for i in get_all_lexers()])
 LEXER_LIST = (
-    ('apacheconf', 'ApacheConf'),
-    ('as', 'ActionScript'),
     ('bash', 'Bash'),
-    ('bbcode', 'BBCode'),
     ('c', 'C'),
-    ('cpp', 'C++'),
-    ('csharp', 'C#'),
     ('css', 'CSS'),
     ('diff', 'Diff'),
     ('django', 'Django/Jinja'),
-    ('erlang', 'Erlang'),
     ('html', 'HTML'),
-    ('ini', 'INI'),
     ('irc', 'IRC logs'),
-    ('java', 'Java'),
     ('js', 'JavaScript'),
-    ('jsp', 'Java Server Page'),
-    ('lua', 'Lua'),
-    ('make', 'Makefile'),
-    ('perl', 'Perl'),
     ('php', 'PHP'),
-    ('pot', 'Gettext Catalog'),
     ('pycon', 'Python console session'),
     ('pytb', 'Python Traceback'),
     ('python', 'Python'),
     ('python3', 'Python 3'),
-    ('rb', 'Ruby'),
-    ('rst', 'reStructuredText'),
-    ('smarty', 'Smarty'),
     ('sql', 'SQL'),
     ('text', 'Text only'),
-    ('xml', 'XML'),
-    ('yaml', 'YAML')
 )
-LEXER_DEFAULT = 'text'
+LEXER_DEFAULT = 'python'
 
 
 class NakedHtmlFormatter(HtmlFormatter):

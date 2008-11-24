@@ -3,10 +3,11 @@ from django.contrib import admin
 
 class SnippetAdmin(admin.ModelAdmin):
     list_display = (
-        'id',
+        '__unicode__',
         'author',
         'lexer',
         'published',
+        'expires',
     )
 
 admin.site.register(Snippet, SnippetAdmin)

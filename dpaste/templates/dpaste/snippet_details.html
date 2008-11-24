@@ -25,16 +25,23 @@
         <span class="date">{{ snippet.published|date:_("DATETIME_FORMAT") }} ({% trans "UTC" %})</span>
     </h1>
 {% endblock %}
+{% load dpaste_tags %}
 
 {% block content %}
 <div id="diff" style="display:none;">diff</div>
 
 <div class="accordion">
     <div class="snippet-options">
+        <abbr title="{% trans "Time to life" %}">TTL:</abbr> {{ snippet.expires|timeuntil  }}
+        &mdash;
+        {% if snippet.pk|in_list:request.session.snippet_list %}
+        <a onclick="return confirm('{% trans "Really delete this snippet?" %}')" href="{% url snippet_delete snippet.secret_id %}">Delete now!</a>
+        &mdash;
+        {% endif %}
         <a id="toggleWordwrap" href="#">{% trans "Wordwrap" %}</a>
     </div>
     <h2>
-        {% if snippet.title %}{{ snippet.title }}{% else %} {% trans "Snippet" %} #{{ snippet.id }}{% endif %}
+        {% if snippet.title %}{{ snippet.title }}{% else %} {% trans "Snippet" %} #{{ snippet.id}}{% endif %}
         <span>{% if snippet.author %}{% blocktrans with snippet.author as author %}by {{ author }}{% endblocktrans %}{% endif %}</span>
     </h2>
     
@@ -53,18 +60,18 @@
     <div class="container" style="display: none;">
 		<form method="post" action"." class="snippetform">
 		<ol>
-			{% for field in snippet_form %}
-			<li>
-				{{ field.errors }}
-				{{ field.label_tag }}
-				{{ field }}
-				{% if request.session.userprefs.display_all_lexer %}
-				{% ifequal field.name "lexer" %}
-					<input type="button" value="{% trans "Guess lexer" %}" id="guess_lexer_btn"/>
-				{% endifequal %}
-				{% endif %}
-			</li>
-			{% endfor %}
+    		{% for field in snippet_form %}
+    		<li>
+    			{{ field.errors }}
+    			{{ field.label_tag }}
+    			{{ field }}
+    			{% if request.session.userprefs.display_all_lexer %}
+    			{% ifequal field.name "lexer" %}
+    				<input type="button" value="{% trans "Guess lexer" %}" id="guess_lexer_btn"/>
+    			{% endifequal %}
+    			{% endif %}
+    		</li>
+    		{% endfor %}
 			<li class="submit"><input type="submit" value="{% trans "Paste it" %}"/></li>
 		</ol>
 		</form>
@@ -101,7 +108,7 @@
     </form>
 
     <h2>{% trans "Options" %}</h2>
-    <p><a href="{% url snippet_details_raw snippet.id %}">{% trans "View raw" %}</a></p>
+    <p><a href="{% url snippet_details_raw snippet.secret_id %}">{% trans "View raw" %}</a></p>
 {% endblock %}
 
 {% block script_footer %}

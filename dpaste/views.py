@@ -1,12 +1,13 @@
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template.context import RequestContext
-from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponse, HttpResponseForbidden
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext_lazy as _
 from dpaste.forms import SnippetForm, UserSettingsForm
 from dpaste.models import Snippet
 from dpaste.highlight import pygmentize, guess_code_lexer
+from django.core.urlresolvers import reverse
 import simplejson
 import difflib
 
@@ -33,7 +34,7 @@ def snippet_new(request, template_name='dpaste/snippet_new.html'):
 
 def snippet_details(request, snippet_id, template_name='dpaste/snippet_details.html', is_raw=False):
 
-    snippet = get_object_or_404(Snippet, pk=snippet_id)
+    snippet = get_object_or_404(Snippet, secret_id=snippet_id)
 
     tree = snippet.get_root()
     tree = tree.get_descendants(include_self=True)
@@ -70,14 +71,24 @@ def snippet_details(request, snippet_id, template_name='dpaste/snippet_details.h
     else:
         return response
 
+def snippet_delete(request, snippet_id):
+    snippet = get_object_or_404(Snippet, secret_id=snippet_id)
+    try:
+        snippet_list = request.session['snippet_list']
+    except KeyError:
+        return HttpResponseForbidden('You have no recent snippet list, cookie error?')
+    if not snippet.pk in snippet_list:
+        return HttpResponseForbidden('That\'s not your snippet, sucka!')
+    snippet.delete()
+    return HttpResponseRedirect(reverse('snippet_new'))
 
 def snippet_userlist(request, template_name='dpaste/snippet_list.html'):
-
+    
     try:
         snippet_list = get_list_or_404(Snippet, pk__in=request.session.get('snippet_list', None))
     except ValueError:
         snippet_list = None
-        
+                
     template_context = {
         'snippets_max': getattr(settings, 'MAX_SNIPPETS_PER_USER', 10),
         'snippet_list': snippet_list,
