@@ -11,6 +11,7 @@ Originally inspired by dpaste.com this application adds the ability to:
 - User defined settings to change the font-family as well as font-sizes
 - Nice colors 
 - Multilangual interface
+- per-user defined expiration of snippets
 
 Installation:
 =============
