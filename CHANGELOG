@@ -1,0 +1,8 @@
+v0.2
+====
+
+- added user-defined exipration for snippets
+- added a management command to purge old snippets
+- new secret ids - This is backwards incompatible!
+- User can delete his snippet at any time
+- added this changelog :)
