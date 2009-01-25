@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-24 21:16+0100\n"
+"POT-Creation-Date: 2009-01-25 21:51+0100\n"
 "PO-Revision-Date: 2008-08-10 01:20+0100\n"
 "Last-Translator: Martin Mahner <martin@mahner.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,39 +27,43 @@ msgstr "In einer Woche"
 msgid "In one month"
 msgstr "In einem Monat"
 
-#: forms.py:25 models.py:20
+#: forms.py:16
+msgid "Save forever"
+msgstr "Für immer speichern"
+
+#: forms.py:26 models.py:20
 msgid "Lexer"
 msgstr "Syntax"
 
-#: forms.py:31 models.py:22
+#: forms.py:32 models.py:22
 msgid "Expires"
 msgstr "Erlischt"
 
-#: forms.py:86 forms.py:95
+#: forms.py:87 forms.py:96
 msgid "Default"
 msgstr "Standard"
 
-#: forms.py:99
+#: forms.py:100
 msgid "Default Name"
 msgstr "Standard Name"
 
-#: forms.py:101
+#: forms.py:102
 msgid "Display all lexer"
 msgstr "Alle Syntaxformate anzeigen"
 
-#: forms.py:104
+#: forms.py:105
 msgid "This also enables the super secret 'guess lexer' function."
 msgstr "Dies aktiviert auch die super geheime 'Syntax erraten' Funktion."
 
-#: forms.py:106
+#: forms.py:107
 msgid "Font Family"
 msgstr "Schriftart"
 
-#: forms.py:107
+#: forms.py:108
 msgid "Font Size"
 msgstr "Schriftgröße"
 
-#: forms.py:108
+#: forms.py:109
 msgid "Line Height"
 msgstr "Zeilenhöhe"
 

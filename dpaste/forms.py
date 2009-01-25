@@ -13,6 +13,7 @@ EXPIRE_CHOICES = (
     (3600, _(u'In one hour')),
     (3600*24*7, _(u'In one week')),
     (3600*24*30, _(u'In one month')),
+    (3500*24*30*12*15, _(u'Save forever')), # 15 years, I call it forever ;)
 )
 
 EXPIRE_DEFAULT = 3600*24*30
