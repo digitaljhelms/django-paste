@@ -8,7 +8,7 @@ from dpaste.forms import SnippetForm, UserSettingsForm
 from dpaste.models import Snippet
 from dpaste.highlight import pygmentize, guess_code_lexer
 from django.core.urlresolvers import reverse
-import simplejson
+from django.utils import simplejson
 import difflib
 
 def snippet_new(request, template_name='dpaste/snippet_new.html'):
